@@ -67,6 +67,7 @@
 (require 'compile)
 (require 'ruby-mode)
 (require 'thingatpt)
+(require 'ruby-mode-expansions)
 
 (eval-when-compile
   (defvar rspec-compilation-mode-map)
@@ -740,8 +741,7 @@ This function also removes itself from `pre-command-hook'."
   "Send the current block to the inferior Ruby process."
   (interactive "P")
   (save-excursion
-    (ruby-end-of-block)
-    (end-of-line)
+    (er/ruby-forward-up)
     (let ((end (point)))
       (ruby-beginning-of-block)
       (ruby-send-region (point) end)))
